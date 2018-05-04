@@ -7,10 +7,14 @@ add_action( 'wp_enqueue_scripts', function() {
 } );
 
 function getSiteValues() {
+	$about = get_fields( 121 );
+	$about["interested_list_tpl"] = "";
+	foreach ($about["interested_list"] as $key => $item)
+		$about["interested_list_tpl"] .= "<light-ui-select-option value='".$item."'>".$item."</light-ui-select-option>";
+
 	$params = array(
-		"about"			=> 	array(),
+		"about"			=> 	$about,
 		"contact"		=>	array(),
-		"community"	=>	array(),
 		"global"		=>	get_fields( 49 ),
 		"home"			=> 	get_fields( 38 ),
 		"privacy"		=>	array(),

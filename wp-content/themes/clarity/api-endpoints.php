@@ -79,4 +79,21 @@ add_action( 'rest_api_init', function () {
 			);
     },
   ) );
+
+  register_rest_route( '/api/data', '/mail', array(
+    'methods' => 'POST',
+    'callback' => function() {
+    		$company_name = urldecode($_POST["company"]);
+		    $sender_email = urldecode($_POST["email"]);
+		    $interest = urldecode($_POST["interest"]);
+		    $message = urldecode($_POST["message"]);
+		    $name = urldecode($_POST["name"]);
+		    $sendto = get_field("send_to_email", 121);
+
+				$headers[] = 'Content-Type: text/html; charset=UTF-8';
+				$headers[] = 'From: '.$name.' in '.$company_name.'Company <'.$sender_email.'>';
+		    
+		    return wp_mail($sendto, "Contact from WP site", $message, $headers);
+    },
+  ) );
 } );
