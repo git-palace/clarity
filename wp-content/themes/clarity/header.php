@@ -62,8 +62,6 @@
 
 	<script type="text/javascript">
 		var siteValues = <?php echo getSiteValues(); ?>;
-
-		console.log( siteValues );
 	</script>
 </head>
 <body>
