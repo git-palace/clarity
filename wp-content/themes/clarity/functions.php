@@ -1,5 +1,4 @@
 <?php
-// Our custom post type function
 function create_posttype() {
 	$labels = array(
     'name'                => _x( 'Configurations', 'Post Type General Name', 'twentythirteen' ),
@@ -17,20 +16,12 @@ function create_posttype() {
     'not_found_in_trash'  => __( 'Not found in Trash', 'twentythirteen' ),
   );
    
-// Set other options for Custom Post Type
-   
   $args = array(
     'label'               => __( 'configurations', 'twentythirteen' ),
     'description'         => __( 'Configuration news and reviews', 'twentythirteen' ),
     'labels'              => $labels,
-    // Features this CPT supports in Post Editor
     'supports'            => array( 'title' ),
-    // You can associate this CPT with a taxonomy or custom taxonomy. 
     'taxonomies'          => array( 'genres' ),
-    /* A hierarchical CPT is like Pages and can have
-    * Parent and child items. A non-hierarchical CPT
-    * is like Posts.
-    */ 
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -45,7 +36,6 @@ function create_posttype() {
     'capability_type'     => 'page',
   );
    
-  // Registering your Custom Post Type
   register_post_type( 'configuration', $args );
 }
 add_action( 'init', 'create_posttype', 0 );
