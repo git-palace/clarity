@@ -80,7 +80,7 @@ function getSiteValues() {
 		"contact"		=>	$contact,
 		"global"		=>	get_fields( 49 ),
 		"home"			=> 	get_fields( 38 ),
-		"privacy"		=>	array(),
+		"privacy"		=>	get_fields( 146 ),
 		"solution"	=>	get_fields( 67 )
 	);
 
