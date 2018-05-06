@@ -54,22 +54,49 @@ function getSiteValues() {
 		$contact["interested_list_tpl"] .= "<light-ui-select-option value='".$item."'>".$item."</light-ui-select-option>";
 
 	$about = get_fields( 121 );
-	$about["teamMembers"] = [];
+	$about["team_member_list"] = [];
 
 	for($idx = 1; $idx <= 10; $idx++){
 		$key = "team_member_".$idx;
-		array_push($about["teamMembers"], array(
+		array_push($about["team_member_list"], array(
 			"img" => $about[$key]["url"],
 			"name" => $about[$key]["alt"],
 			"role" => $about[$key]["caption"]
 		));
 	}
+
+    $global = get_fields( 49 );
+    $global["add_btn_container_class"] = "";
+    $global["add_btn_container_class_xs"] = "";
+    $global["one_more_button_tpl"] = "";
+    $global["one_more_button_xs_tpl"] = "";
+    if( $global["add_one_more_button"] ) {
+        $global["one_more_button_tpl"] = '<a href="'.$global["more_button_link"].'" target="_blank" class="c-link u-inline-block u-valign-middle  c-button--login u-marg-b-xs c-anim--slide-x c-anim--8 | u-marg-b-md@sm ">'.$global["more_button_text"].'</a>';
+
+        $global["one_more_button_xs_tpl"] = '<a href="'.$global["more_button_link"].'" target="_blank" class="c-link u-inline-block u-valign-middle  c-button--login u-marg-r-sm">'.$global["more_button_text"].'</a>';
+        
+        $global["add_btn_container_class_xs"] = " px-xs-5 d-xs-flex flex-column text-center ";
+    }
+
+    $home = get_fields( 38 );
+    $home["add_btn_container_class"] = "";
+    $home["add_btn_container_class_xs"] = "";
+    $home["one_more_button_tpl"] = "";
+    $home["one_more_button_xs_tpl"] = "";
+
+    if( $home["add_one_more_button"] ) {
+        $home["one_more_button_tpl"] = '<a href="'.$home["more_button_link"].'" class="u-pointer-auto c-link u-inline-block c-button--expand2 m-sm-t-2 {{currentIndex==3?\'is-active\':\'\'}}"><svg  class="c-button--expand2__left-block" viewbox="0 0 24 24"><circle  cx="12" cy="12" r="12" /></svg><span class="c-button--expand2__center-block"></span><svg  class="c-button--expand2__right-block" viewbox="0 0 24 24"><circle  cx="12" cy="12" r="12" /></svg><span class="c-button--expand2__text">'.$home["more_button_text"].'</span></a>';
+        $home["add_btn_container_class"] = " d-flex flex-column ";
+
+        $home["one_more_button_xs_tpl"] = '<a href="'.$home["more_button_link"].'" class="c-link u-inline-block c-button--expand2 m-sm-t-2 {{currentIndex==3?\'is-active\':\'\'}}"><svg  class="c-button--expand2__left-block" viewbox="0 0 24 24"><circle  cx="12" cy="12" r="12" /></svg><span class="c-button--expand2__center-block"></span><svg  class="c-button--expand2__right-block" viewbox="0 0 24 24"><circle  cx="12" cy="12" r="12" /></svg><span class="c-button--expand2__text">'.$home["more_button_text"].'</span></a>';
+        $home["add_btn_container_class_xs"] = " px-xs-5 d-xs-flex flex-column text-center ";
+    }
  
 	$params = array(
 		"about"			=> 	$about,
 		"contact"		=>	$contact,
-		"global"		=>	get_fields( 49 ),
-		"home"			=> 	get_fields( 38 ),
+		"global"		=>	$global,
+		"home"			=> 	$home,
 		"privacy"		=>	get_fields( 146 ),
 		"solution"	=>	get_fields( 67 )
 	);

@@ -4,3 +4,54 @@ Author: Legendary Assassin
 */
 
 @import url('custom.css');
+
+.c-logo.default {
+	width: 125px;
+}
+
+.c-logo.large {
+	width: 150px;
+}
+
+.c-logo.small {
+	width: 100px;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.m-sm-t-2 {
+	margin-top: 10px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+@media (max-width:767px) {
+	.c-logo.default {
+		width: 100px;
+	}
+
+	.c-logo.large {
+		width: 125px;
+	}
+
+	.c-logo.small {
+		width: 75px;
+	}
+
+	.d-xs-flex {
+		display: flex;
+	}
+
+	.px-xs-5 {
+		padding-left: 5rem!important;
+		padding-right: 5rem!important;
+	}
+}
