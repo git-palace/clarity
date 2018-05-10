@@ -83,17 +83,29 @@ add_action( 'rest_api_init', function () {
   register_rest_route( '/api/data', '/mail', array(
     'methods' => 'POST',
     'callback' => function() {
-    		$company_name = urldecode($_POST["company"]);
-		    $sender_email = urldecode($_POST["email"]);
-		    $interest = urldecode($_POST["interest"]);
-		    $message = urldecode($_POST["message"]);
-		    $name = urldecode($_POST["name"]);
-		    $sendto = get_field("send_to_email", 109);
+			$company_name = urldecode($_POST["company"]);
+			$sender_email = urldecode($_POST["email"]);
+			$interest = urldecode($_POST["interest"]);
+			$message = urldecode($_POST["message"]);
+			$name = urldecode($_POST["name"]);
 
-				$headers[] = 'Content-Type: text/html; charset=UTF-8';
-				$headers[] = 'From: '.$name.' in '.$company_name.'Company <'.$sender_email.'>';
-		    
-		    return wp_mail($sendto, "Contact from WP site", $message, $headers);
+			// contact page is 109
+			$sendto = get_field("send_to_email", 109);
+
+			$comment_content = "Interest Type : ".$interest."\nCompany Name : ".$company_name."\n\nMessage Content : \n".$message;
+			$comment = array(
+				'comment_post_ID' => 109,
+				'comment_author'	=> $name,
+				'comment_author_email'	=> $sender_email,
+				'comment_content'	=> $comment_content
+			);
+
+			return wp_insert_comment( $comment );
+
+			/*$headers[] = 'Content-Type: text/html; charset=UTF-8';
+			$headers[] = 'From: '.$name.' in '.$company_name.'Company <'.$sender_email.'>';
+
+			return wp_mail($sendto, "Contact from WP site", $message, $headers);*/
     },
   ) );
 } );
